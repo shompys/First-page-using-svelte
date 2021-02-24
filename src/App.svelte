@@ -1,14 +1,18 @@
 <script>
-    import { Router, Route, Link} from 'svelte-routing';
+import { Router, Route, Link} from 'svelte-routing';
 
-    import Home from './components/views/Home.svelte';
+import Home from './components/views/Home.svelte';
+import Signin from './components/views/Signin.svelte';
+import Signup from './components/views/Signup.svelte';
 	
 </script>
 <main>
 	
 	<Router>
-		<Route path="/home" component={Home} />
 		<Route path="/" component={Home} />
+		<Route path="/home" component={Home} />
+		<Route path="/signin" component={Signin} />
+		<Route path="/signup" component={Signup} />
 	</Router>
 
 </main>

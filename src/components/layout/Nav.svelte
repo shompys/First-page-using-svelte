@@ -14,39 +14,42 @@ $: grid = user && 'grid-template-columns: repeat(1, 1fr);'
     </div>
     <div class="nav__part-two" style={grid}>
         {#if user}
-            <ButtonLink to={'/login'} message={'Cerrar sesion'} background={'var(--color-twitch)'} />
+            <ButtonLink to={'/cambiaresto'} message={'Cerrar sesion'} background={'var(--color-twitch)'} />
         {:else}
-            <ButtonLink to={'/login'} message={'Iniciar sesión'} background={'var(--color-twitch)'} />
-            <ButtonLink to={'/login'} message={'Registrarse'} background={'var(--color-twitch)'} />
+            <ButtonLink to={'/signin'} message={'Iniciar sesión'} background={'#7e7e7e'} />
+            <ButtonLink to={'/signup'} message={'Registrarse'} background={'var(--color-twitch)'} />
         {/if}
             
     </div>
 </nav>
 
 <style>
-    nav{
-        width:100%;
+     nav{
+        
         background-color: var(--color-github);
         display:flex;
         justify-content: space-between;
         padding: .5rem;
     }
     img{
+       
         width: 3.7rem;
-        
     }
     img:hover{
         transform: rotateZ(1440deg);
         transition: all 5s ease;
     }
-    .nav__part-one{
+    .nav__part-two{
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: .5rem;
+            align-items: center;
+    }
+    
+    @media screen and (min-width: 768px){
+        
         
     }
-    .nav__part-two{
-        display: grid;
-        grid-template-columns: repeat(2, 1fr);
-        gap: .5rem;
-        align-items: center;
-    }
+   
     
 </style>

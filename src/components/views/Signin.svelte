@@ -3,4 +3,4 @@
 </script>
 
 <Nav />
-<h1>Home</h1>
+<h1>Iniciar sesión</h1>
