@@ -3,8 +3,3 @@ from="/*"
 to="https://shompys.jonathangomezit.com"
 status=200
 
-[[redirects]]
-from="https://www.shompys.jonathangomezit.com"
-to="https://shompys.netlify.app/"
-status=200
-force=true
