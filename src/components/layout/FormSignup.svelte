@@ -1,7 +1,7 @@
 <script>
-    import {fade, fly} from 'svelte/transition';
-
-    import Button from "../common/Button.svelte";
+import Link from 'svelte-routing/src/Link.svelte';
+import {fade, fly} from 'svelte/transition';
+import Button from "../common/Button.svelte";
 
     let user = {
         name: "",
@@ -11,118 +11,167 @@
         password: "",
         receivePassword: "",
     };
-
-    let isFirstStep = true;
     
-    const placeholderEffect = e => {
-        const label = e.target.previousElementSibling;
-        const st = label.style;
-        st.top= "0";
-        st.left= "5px";
-        st.fontSize= ".8em";
-        st.background= '#fff';
-        st.padding= '0 5px 0 5px';
-        st.color= 'var(--color-twitch)';
-        st.transition= "all .2s ease";
-        
-    }
-    const placeholderEffectBack = e => {
-        if(e.target.value === ''){
-            const label = e.target.previousElementSibling;
-            const st = label.style;
-            st.top= '50%';
-            st.left= "16px";
-            st.fontSize= '.9em';
-            st.background= 'none';
-            st.padding= '0 0 0 0';
-            st.color= '#A2A2A2';
-            st.transition= "all .2s .5s ease";
-        } 
-    }
+    let steps = 1;
 
     const submitHandler = (e) => {
         console.log("ejecuto");
     };
+    
+    const placeholderEffect = e => {
+        const labelSt = e.target.parentElement.style;
+        const spanSt = e.target.previousElementSibling.style;
 
+        labelSt.boxShadow=" 0px 0px 1px 1px var(--color-twitch)";
+        spanSt.color= 'var(--color-twitch)'
+        spanSt.top='-9px';
+        spanSt.left='3px';
+        spanSt.fontSize='.8em';
+        spanSt.backgroundColor='#fff';
+        spanSt.padding= '0 5px';
+        labelSt.transition = 'all .5s ease';
+        spanSt.transition= 'all .5s ease';
+    }
 
+    const placeholderEffectBack = e => {
+        if(e.target.value.trim().length === 0){
 
+            e.target.value = e.target.value.trim();
+
+            user = { ...user, [e.target.name] : e.target.value }
+
+            const labelSt = e.target.parentElement.style;
+            const spanSt = e.target.previousElementSibling.style;
+            labelSt.boxShadow="none";
+            spanSt.color='#A2A2A2';
+            spanSt.top='15px';
+            spanSt.left='15px';
+            spanSt.fontSize='.9em';
+            spanSt.backgroundColor= 'transparent';
+            spanSt.padding= '0 0';
+            labelSt.transition = 'all .5s ease';
+            spanSt.transition= "all .5s ease";
+        }
+    }
 </script>
 
+
 <form on:submit|preventDefault={submitHandler}>
-    {#if isFirstStep}
-        <div class="content-block" in:fade out:fly|local={{x:-200 }}>
+    
+    {#if steps === 1}
+        <h3>Registro</h3>
+        <p>El usuario sera tu ingreso a la plataforma y debes tener acceso al email ya que recibirás un token de verificación.</p>
 
-            <div class="content-labelAndInput">
-                <label for="name">Nombre</label>
-                <input type="text" bind:value={user.name} id="name" autoComplete="off"  on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>    
-            <div class="content-labelAndInput">
-                <label for="lastname">Apellido</label>
-                <input type="text" bind:value={user.lastname} id="lastname" autoComplete="off" on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>
-            <div class="content-labelAndInput">
-                <label for="user">Usuario</label>
-                <input type="text" bind:value={user.username} id="user" autoComplete="off" on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>
-            <div class="content-labelAndInput">
-                <label for="email">Email</label>
-                <input type="text" bind:value={user.email} id="email" autoComplete="off" on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>
-
-        </div><!--end .content-block-->
-
-        <Button background={"var(--color-twitch)"} message={"Continuar"}  on:click={() => isFirstStep = !isFirstStep}/>
+            <label>
+                <span>Nombre</span>
+                <input type="text"
+                    bind:value={user.name}
+                    autoComplete="off"
+                    name="name"
+                    on:focus={placeholderEffect} 
+                    on:blur={placeholderEffectBack}
+                />
+            </label>
+            
+            <label>
+                <span>Apellido</span>
+                <input type="text" 
+                    bind:value={user.lastname} 
+                    autoComplete="off"
+                    name="lastname"
+                    on:focus={placeholderEffect} 
+                    on:blur={placeholderEffectBack}
+                />
+            </label>
+            <label>
+                <span>Usuario</span>
+                <input type="text" 
+                    bind:value={user.username}
+                    autoComplete="off"
+                    name="user"
+                    on:focus={placeholderEffect} 
+                    on:blur={placeholderEffectBack}
+                />
+            </label>
+            <label >
+                <span>Email</span>
+                <input type="text" 
+                    bind:value={user.email}
+                    on:focus={placeholderEffect}
+                    on:blur={placeholderEffectBack}
+                    autoComplete="off"
+                    name="email"
+                />
+            </label>
+            
+        <Button background={"var(--color-twitch)"} message={"Continuar"}  on:click={() => steps = 2}/>
+            
     {:else}
-        <div class="content-block" in:fly={{x: 200, delay: 1000}}>
-
-            <div class="content-labelAndInput">
-                <label for="password">Contraseña</label>
-                <input type="password" bind:value={user.password} id="password" autoComplete="off" on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>
-            <div class="content-labelAndInput">
-                <label for="receivepassword">Repita contraseña</label>
-                <input type="password" bind:value={user.receivePassword} id="receivepassword" autoComplete="off" on:click={placeholderEffect} on:keydown={placeholderEffect} on:mouseleave={placeholderEffectBack} on:keyup={placeholderEffectBack}/>
-            </div>
-
-        </div><!--end .content-block-->
+        <h3>Registro</h3>
+        <p>La contraseña debe tener almenos 8 caracteres, intenta no repetir tu contraseña en otras plataformas.</p>
+        <label>
+            <span>Contraseña</span>
+            <input type="password"
+                bind:value={user.password} 
+                autoComplete="off"
+                name="password"
+                on:focus={placeholderEffect}
+                on:blur={placeholderEffectBack}
+            />
+        </label>
+        <label>
+            <span>Repita contraseña</span>
+            <input type="password"
+                bind:value={user.receivePassword} 
+                autoComplete="off"
+                name="receivePassword"
+                on:focus={placeholderEffect}
+                on:blur={placeholderEffectBack}
+            />
+        </label>
+        
         <Button background={"var(--color-twitch)"} message={"Registrar"} type={"submit"} />
+        <p>Al hacer clic en Registrarse, indicas que has leído y aceptas los <Link to="/">Términos del servicio</Link> y el <Link to="/">Aviso de privacidad</Link>.</p>
     {/if}
     
 </form>
 
 <style>
+    
     form {
         display: grid;
         justify-items: center;
-        gap: .5em;
+        gap: 2em;
         
-    }
-    .content-block{
-        display:grid;
-        gap: .5em;
-        
-    }
-    .content-labelAndInput{
-        display:grid;
-        position:relative;
     }
     label{
-        font-size: .9em;
-        position: absolute;
-        color: #A2A2A2;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 16px;
-    }
-    
-    input {
+        display:block;
+        position:relative;
         border: 1px solid var(--color-twitch);
-        padding: 15px;
         width: 18rem;
         border-radius: 0.2rem;
-        font-size: 1em;
     }
-    input:focus {
-        box-shadow: 0px 0px 1px 1px var(--color-twitch);
+    input {
+        display:block;
+        border: none;
+        width: 100%;
+        font-size: .9em;
+        padding: 15px;
     }
+    span{
+        position:absolute;
+        top: 15px;
+        left: 15px;
+        color: #A2A2A2;
+        font-size: .9em;
+    }
+    span:hover{
+        cursor:text
+    }
+    p{
+        text-align: center;
+        max-width: 25rem;
+        
+    }
+    
 </style>

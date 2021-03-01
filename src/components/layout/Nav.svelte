@@ -5,19 +5,18 @@ import logo from '../assets/images/index';
 import ButtonLink from '../common/ButtonLink.svelte';
 export let user = false;
 
-$: grid = user && 'grid-template-columns: repeat(1, 1fr);'
 </script>
 
 <nav>
     <div class="nav__part-one">
         <Link to="/home"><img src={logo.logo} alt="logo"></Link>
     </div>
-    <div class="nav__part-two" style={grid}>
+    <div class="nav__part-two">
         {#if user}
             <ButtonLink to={'/cambiaresto'} message={'Cerrar sesion'} background={'var(--color-twitch)'} />
         {:else}
-            <ButtonLink to={'/signin'} message={'Iniciar sesión'} background={'#7e7e7e'} />
-            <ButtonLink to={'/signup'} message={'Registrarse'} background={'var(--color-twitch)'} />
+            
+            <ButtonLink to={'/signin'} message={'Iniciar sesión'} background={'var(--color-twitch)'} svg={"fas fa-sign-in-alt"} />
         {/if}
             
     </div>
@@ -29,7 +28,7 @@ $: grid = user && 'grid-template-columns: repeat(1, 1fr);'
         background-color: var(--color-github);
         display:flex;
         justify-content: space-between;
-        padding: .5rem;
+        padding: .5rem 1rem .5rem .5rem;
     }
     img{
        
@@ -41,8 +40,7 @@ $: grid = user && 'grid-template-columns: repeat(1, 1fr);'
     }
     .nav__part-two{
             display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: .5rem;
+            grid-template-columns: repeat(1, 1fr);
             align-items: center;
     }
     

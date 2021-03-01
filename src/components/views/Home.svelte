@@ -3,4 +3,9 @@
 </script>
 
 <Nav />
-<h1>Home</h1>
+<h3>Home</h3>
+<p>App en desarrollo con svelte.</p>
+
+<style>
+    
+</style>

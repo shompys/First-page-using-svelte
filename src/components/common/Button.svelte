@@ -3,6 +3,7 @@
 </script>
 
 <!-- particularidad de svelte declarar un evento para utilizarlo en la declaracion del componente en otro scope -->
+
 <button style={`background: ${background}; color: ${color}`} {type} on:click>
     {message}
 </button>

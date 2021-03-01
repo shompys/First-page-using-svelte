@@ -1,40 +1,53 @@
 <script>
     import {Link} from 'svelte-routing';
-    export let to= '', message= 'no-data', background= '', color= '#fff';
+
+    export let to= '', message= 'no-data', background= '', color= '#fff', svg= '';
+    
 </script>
 
-<div style={`background: ${background}`}>
+<!-- <div style={`background: ${background}`}> -->
+    
+    <Link {to} style={`color: ${color}`} >
+        <div style={`background: ${background}`}>
 
-    <Link {to} style={`color: ${color}`}>
-        <span>
-            {message}
-        </span>
+            <i class={svg}></i>
+
+            <span>{message}</span>
+
+        </div>
     </Link>
 
-</div>
+<!-- </div> -->
 
 <style>
+    span{
+        display:none;
+    }
     div{
         display: flex;
         justify-content: center;
         align-items: center;
         cursor:pointer;
         text-align: center;
-        width: 7rem;
-        height: 2.5rem;
-        font-weight:500;
-        font-size: 1em;
-        padding: .8rem 0 .8rem 0;
+        padding: 1rem 2rem;
+        /* font-weight:500; */
+        /* font-size: 1em; */
+        
         border-radius: .3rem;
-        text-shadow: 0 1px 0 rgba(255,255,255,.3);
     }
     div:hover{
         
-        filter:brightness(.9)
+        filter:brightness(.9);
+    }
+    i{
+        color: #fff;
     }
     @media screen and (min-width: 768px){
+        span{
+            display:inline-block;
+        }
         div{
-            width: 9rem;
+            padding: 16px 8px 16px 8px;
         }
     }
     
