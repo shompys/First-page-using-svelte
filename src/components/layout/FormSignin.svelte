@@ -1,5 +1,5 @@
 <script>
-
+import {Link} from 'svelte-routing';
 
 import Button from "../common/Button.svelte";
 
@@ -50,10 +50,10 @@ let user = {
 
 </script>
 
-<h3>Iniciar sesión</h3>
+
 
 <form on:submit|preventDefault={submitHandler}>
-
+    <h3>Iniciar sesión</h3>
     <label>
         <span>Usuario</span>
         <input type="text" 
@@ -76,14 +76,22 @@ let user = {
     </label>
     
     <Button background={"var(--color-twitch)"} message={"Entrar"} type={'submit'}/>
-    
+
+    <p>
+        Para crear cuenta presiona
+        <Link to="/signup">
+            <b class="aqui">aquí</b>
+        </Link>
+    </p>
+
 </form>
 
 <style>
-        form {
+    form {
         display: grid;
         justify-items: center;
         gap: 2em;
+        
         
     }
     label{
@@ -99,6 +107,7 @@ let user = {
         width: 100%;
         font-size: .9em;
         padding: 15px;
+        
     }
     span{
         position:absolute;
@@ -107,7 +116,12 @@ let user = {
         color: #A2A2A2;
         font-size: .9em;
     }
+    
     span:hover{
         cursor:text
+    }
+    .aqui{
+        color: var(--color-twitch);
+        font-weight: bold;
     }
 </style>

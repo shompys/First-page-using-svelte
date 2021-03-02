@@ -24,14 +24,15 @@
         display:none;
     }
     div{
-        display: flex;
-        justify-content: center;
+       
+        display: flex; 
+        justify-content: center; 
         align-items: center;
         cursor:pointer;
         text-align: center;
         padding: 1rem 2rem;
-        /* font-weight:500; */
-        /* font-size: 1em; */
+        font-weight:500;
+        font-size: 1em;
         
         border-radius: .3rem;
     }
@@ -45,6 +46,9 @@
     @media screen and (min-width: 768px){
         span{
             display:inline-block;
+        }
+        i{
+            padding: 0 .7rem 0 0;
         }
         div{
             padding: 16px 8px 16px 8px;

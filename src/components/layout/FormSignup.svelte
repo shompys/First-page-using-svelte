@@ -2,6 +2,7 @@
 import Link from 'svelte-routing/src/Link.svelte';
 import {fade, fly} from 'svelte/transition';
 import Button from "../common/Button.svelte";
+import ButtonBack from '../common/ButtonBack.svelte';
 
     let user = {
         name: "",
@@ -107,7 +108,10 @@ import Button from "../common/Button.svelte";
         <Button background={"var(--color-twitch)"} message={"Continuar"}  on:click={() => steps = 2}/>
             
     {:else}
-        <h3>Registro</h3>
+        <!-- <div> -->
+            <!-- <ButtonBack on:click={() => steps = 1}/> -->
+            <h3>Registro</h3>
+        <!-- </div> -->
         <p>La contraseña debe tener almenos 8 caracteres, intenta no repetir tu contraseña en otras plataformas.</p>
         <label>
             <span>Contraseña</span>
@@ -132,8 +136,9 @@ import Button from "../common/Button.svelte";
         
         <Button background={"var(--color-twitch)"} message={"Registrar"} type={"submit"} />
         <p>Al hacer clic en Registrarse, indicas que has leído y aceptas los <Link to="/">Términos del servicio</Link> y el <Link to="/">Aviso de privacidad</Link>.</p>
+        
     {/if}
-    
+    <p>¿Ya tienes una cuenta?</p>
 </form>
 
 <style>
@@ -144,6 +149,7 @@ import Button from "../common/Button.svelte";
         gap: 2em;
         
     }
+
     label{
         display:block;
         position:relative;
