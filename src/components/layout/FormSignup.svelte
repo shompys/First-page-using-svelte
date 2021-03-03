@@ -61,7 +61,7 @@ import ButtonBack from '../common/ButtonBack.svelte';
     
     {#if steps === 1}
         <h3>Registro</h3>
-        <p>El usuario sera tu ingreso a la plataforma y debes tener acceso al email ya que recibirás un token de verificación.</p>
+        <p>El usuario será tu ingreso a la plataforma y debes tener acceso al email ya que recibirás un token de verificación.</p>
 
             <label>
                 <span>Nombre</span>
@@ -110,9 +110,9 @@ import ButtonBack from '../common/ButtonBack.svelte';
     {:else}
         <!-- <div> -->
             <!-- <ButtonBack on:click={() => steps = 1}/> -->
-            <h3>Registro</h3>
+        <h3>Registro</h3>
         <!-- </div> -->
-        <p>La contraseña debe tener almenos 8 caracteres, intenta no repetir tu contraseña en otras plataformas.</p>
+        <p>La contraseña debe tener al menos 8 caracteres, intenta no repetir tu contraseña en otras plataformas.</p>
         <label>
             <span>Contraseña</span>
             <input type="password"
@@ -135,10 +135,13 @@ import ButtonBack from '../common/ButtonBack.svelte';
         </label>
         
         <Button background={"var(--color-twitch)"} message={"Registrar"} type={"submit"} />
-        <p>Al hacer clic en Registrarse, indicas que has leído y aceptas los <Link to="/">Términos del servicio</Link> y el <Link to="/">Aviso de privacidad</Link>.</p>
+        <p class="term-service">Al hacer clic en Registrarse, indicas que has leído y aceptas los <Link to="/">Términos del servicio</Link> y el <Link to="/">Aviso de privacidad</Link>.</p>
         
     {/if}
-    <p>¿Ya tienes una cuenta?</p>
+    <p class="have-an-account">
+        ¿Ya tienes una cuenta? presiona
+    <Link to="/signin"><b class="aqui"> aquí</b></Link>
+    </p>
 </form>
 
 <style>
@@ -176,8 +179,15 @@ import ButtonBack from '../common/ButtonBack.svelte';
     }
     p{
         text-align: center;
-        max-width: 25rem;
-        
+        width: 18rem;
+        max-width: 25rem;  
     }
-    
+    .term-service{
+        /* text-align: center; */
+        font-size: .8em;
+    }
+    .aqui{
+        color: var(--color-twitch);
+        font-weight: bold;
+    }
 </style>

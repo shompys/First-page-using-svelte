@@ -23,16 +23,22 @@ import Signup from './components/views/Signup.svelte';
 </main>
 
 <style>
-	
+	main{
+		min-height: 100%;
+	}
 	:global(:root){
 		--color-twitch: rgb(145,71,255);
 		--color-github: #24292e;
 		--color-gris: #7e7e7e;
-		
+		--color-title: #575757;
+		--color-text: #6c757d;
 	}
 	:global(p){
 		font-size: .9em;
-		color: #6c757d;
+		color: var(--color-text);
+	}
+	:global(h3){
+		color: var(--color-title);
 	}
 </style>
 
